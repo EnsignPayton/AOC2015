@@ -4,7 +4,7 @@
 char* get_input(void) {
 	FILE* pFile = fopen("input", "r");
 	if (pFile == NULL) {
-		fprintf(stderr, "Input file could not be opened");
+		fprintf(stderr, "Input file could not be opened\n");
 		return NULL;
 	}
 
@@ -12,8 +12,10 @@ char* get_input(void) {
 	long size = ftell(pFile);
 	rewind(pFile);
 
-	char* buf = malloc(sizeof(char) * (size + 1));
-	fgets(buf, sizeof(char) * (size + 1), pFile);
+	int len = sizeof(char) * (size + 1);
+	char* buf = malloc(len);
+	int n = fread(buf, 1, len - 1, pFile);
+	buf[n] = '\0';
 	fclose(pFile);
 
 	return buf;

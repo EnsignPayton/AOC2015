@@ -5,7 +5,17 @@
 mkdir -p bin
 mkdir -p obj
 
+echo "Compiling shared.c"
 gcc -o obj/shared.o -c shared.c
-gcc -o obj/day1.o -c day1.c
-gcc -o bin/day1 obj/day1.o obj/shared.o
+
+for i in $(seq 1 30)
+do
+	if [ -f "day$i.c" ]; then
+		echo "Compiling day$i.c"
+		gcc -o "obj/day$i.o" -c "day$i.c"
+		gcc -o "bin/day$i" "obj/day$i.o" "obj/shared.o"
+	fi
+done
+
+echo "Done"
 

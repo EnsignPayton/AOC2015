@@ -36,13 +36,11 @@ int solve2(char* input) {
 }
 
 void print1(char* input) {
-	int result = solve1(input);
-	printf("%d %s\n", result, input);
+	printf("%d %s\n", solve1(input), input);
 }
 
 void print2(char* input) {
-	int result = solve2(input);
-	printf("%d %s\n", result, input);
+	printf("%d %s\n", solve2(input), input);
 }
 
 int main(void) {

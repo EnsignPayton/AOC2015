@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "shared.h"
 
 int solve1(char* input) {
 	int floor = 0;
@@ -57,27 +58,14 @@ int main(void) {
 	print1(")())())");
 	print2(")");
 	print2("()())");
-	
+
 	// Real Input
-	FILE* pFile = fopen("input", "r");
-	if (pFile != NULL) {
-		fseek(pFile, 0, SEEK_END);
-		long size = ftell(pFile);
-		char* buf = malloc(sizeof(char) * (size + 1));
+	char* buf = get_input();
 
-		rewind(pFile);
-		fgets(buf, sizeof(char) * (size + 1), pFile);
-
-		int sol1 = solve1(buf);
-		printf("Part 1: %d\n", sol1);
-
-		int sol2 = solve2(buf);
-		printf("Part 2: %d\n", sol2);
-
+	if (buf != NULL) {
+		printf("Part 1: %d\n", solve1(buf));
+		printf("Part 2: %d\n", solve2(buf));
 		free(buf);
-	   	fclose(pFile);
-	} else {
-		fprintf(stderr, "Input file could not be opened");
 	}
 
 	return 0;
